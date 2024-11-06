@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  script:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+
+  http:
+    image: nginx:alpine
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/app
+    depends_on:
+      - script
