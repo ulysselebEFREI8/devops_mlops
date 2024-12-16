@@ -1,0 +1,53 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          cd ml_app
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          cd ml_app
+          python -m unittest discover  # Remplace par ta commande de tests
+
+      - name: Train model
+        run: |
+          cd ml_app
+          python train.py  # Entraînement du modèle
+
+      - name: Build Docker image
+        run: |
+          docker build -t my_ml_app ./ml_app  # Crée une image Docker pour l'application
+
+      - name: Push Docker image to Docker Hub (ou autre registry)
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker tag my_ml_app:latest ulysseefrei/my_ml_app:latest
+          docker push ulysseefrei/my_ml_app:latest  # Pousse l'image vers Docker Hub
+
+      - name: Deploy the application
+        run: |
+          echo "Deploying the application..."
+          docker run -d --name my_ml_app_container -p 5000:5000 myusername/my_ml_app:latest  # Lance le container sur le serveur
+

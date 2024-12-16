@@ -20,8 +20,8 @@ resource "docker_container" "ml_app" {
     name = docker_network.mlops_network.name
   }
   ports {
-    internal = 5000
-    external = 5000
+    internal = 8000
+    external = 8000
   }
   command = [
     "sh", "-c", "pip install -r /app/requirements.txt && python /app/app.py"
