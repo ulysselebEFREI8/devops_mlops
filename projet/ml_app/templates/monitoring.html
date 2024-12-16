@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monitoring</title>
 </head>
 <body>
-    <h1>Statistiques du modèle</h1>
+    <h1>Monitoring des Prédictions</h1>
+
+    <h2>Statistiques sur les prix des maisons</h2>
     <ul>
-        <li>Prix moyen: {{ stats.mean_price }}</li>
-        <li>Prix médian: {{ stats.median_price }}</li>
-        <li>Prix maximum: {{ stats.max_price }}</li>
+        <li>Moyenne des prix : {{ stats.mean_price }}</li>
+        <li>Médiane des prix : {{ stats.median_price }}</li>
+        <li>Prix maximum : {{ stats.max_price }}</li>
     </ul>
+
+    <h2>Statistiques sur les prédictions</h2>
+    <ul>
+        <li>Moyenne des prédictions : {{ stats.mean_prediction }}</li>
+        <li>Médiane des prédictions : {{ stats.median_prediction }}</li>
+        <li>Prédiction maximale : {{ stats.max_prediction }}</li>
+    </ul>
+
+    <a href="/">Retour à l'accueil</a>
 </body>
 </html>
-

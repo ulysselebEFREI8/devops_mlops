@@ -29,7 +29,7 @@ jobs:
       - name: Run tests
         run: |
           cd ml_app
-          python -m unittest discover  # Remplace par ta commande de tests
+          python -m unittest discover tests  # Découvre et exécute tous les tests dans le dossier 'tests'
 
       - name: Train model
         run: |
@@ -49,5 +49,4 @@ jobs:
       - name: Deploy the application
         run: |
           echo "Deploying the application..."
-          docker run -d --name my_ml_app_container -p 5000:5000 myusername/my_ml_app:latest  # Lance le container sur le serveur
-
+          docker run -d --name my_ml_app_container -p 8000:8000 myusername/my_ml_app:latest  # Lance le container sur le serveur
