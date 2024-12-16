@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction</title>
+</head>
+<body>
+    <h1>Prediction du prix de la maison</h1>
+    <form method="post">
+        <label>Nombre de chambres:</label><input type="text" name="bedrooms"><br>
+        <label>Nombre de salles de bain:</label><input type="text" name="bathrooms"><br>
+        <label>Superficie habitable (en m2):</label><input type="text" name="sqft_living"><br>
+        <label>Superficie du terrain (en m2):</label><input type="text" name="sqft_lot"><br>
+        <label>Waterfront (0 ou 1):</label><input type="text" name="waterfront"><br>
+        <label>Condition (0 à 5):</label><input type="text" name="condition"><br>
+        <label>Grade (0 à 11):</label><input type="text" name="grade"><br>
+        <label>Année de construction:</label><input type="text" name="yr_built"><br>
+        <button type="submit">Predire</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Le prix prédit de la maison est: {{ prediction }}$</h2>
+    {% endif %}
+</body>
+</html>
