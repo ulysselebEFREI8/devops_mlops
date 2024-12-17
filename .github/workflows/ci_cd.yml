@@ -41,13 +41,16 @@ jobs:
           cd projet
           docker build -t my_ml_app ./ml_app  # Crée une image Docker pour l'application
 
-      - name: Push Docker image to Docker Hub (ou autre registry)
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker tag my_ml_app:latest ulysseefrei/my_ml_app:latest
-          docker push ulysseefrei/my_ml_app:latest  # Pousse l'image vers Docker Hub
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Tag Docker image
+        run: docker tag my_ml_app:latest ${{ secrets.DOCKER_USERNAME }}/my_ml_app:latest
+
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/my_ml_app:latest  # Pousse l'image vers Docker Hub
 
       - name: Deploy the application
         run: |
           echo "Deploying the application..."
-          docker run -d --name my_ml_app_container -p 8000:8000 myusername/my_ml_app:latest  # Lance le container sur le serveur
+          docker run -d --name my_ml_app_container -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/my_ml_app:latest  # Lance le container
