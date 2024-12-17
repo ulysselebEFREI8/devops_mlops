@@ -9,4 +9,4 @@ class TestAppIntegration(unittest.TestCase):
     def test_predict_integration(self):
         response = self.client.post('/predict', data={'bedrooms': 3, 'bathrooms': 2, 'sqft_living': 1400, 'sqft_lot': 5000, 'waterfront': 0, 'condition': 3, 'grade': 8, 'yr_built': 2000})
         self.assertEqual(response.status_code, 200)
-        self.assertIn('prediction', response.data.decode())
+        self.assertIn('Le prix prédit de la maison est:', response.data.decode())
