@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ulbefrei/devops_efrei/projet/ml_app/mlruns/0/a512c294a0864ed289c0cdaedc210eb4/artifacts
+end_time: 1734448089981
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a512c294a0864ed289c0cdaedc210eb4
+run_name: painted-shoat-76
+run_uuid: a512c294a0864ed289c0cdaedc210eb4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1734448088004
+status: 3
+tags: []
+user_id: ulbefrei

@@ -1,9 +1,12 @@
-import pandas as pd
 import os
+import mlflow
+import mlflow.sklearn
+import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import joblib
+import subprocess
 
 def load_data():
     """ Charger et prétraiter les données d'entraînement. """
@@ -21,8 +24,12 @@ def load_data():
 
     return df
 
+def start_mlflow_ui():
+    """ Démarrer l'interface MLflow sur le port 8001 """
+    subprocess.Popen(["mlflow", "ui", "--host", "0.0.0.0", "--port", "8001"])
+
 def train_model():
-    """ Entraîner et sauvegarder le modèle. """
+    """ Entraîner et sauvegarder le modèle avec MLflow. """
     df = load_data()
     X = df.drop(columns='price')
     y = df['price']
@@ -34,10 +41,24 @@ def train_model():
     model = LinearRegression()
     model.fit(X_train, y_train)
 
-    # Sauvegarder le modèle
+    # Enregistrer le modèle avec MLflow
+    with mlflow.start_run():
+        mlflow.sklearn.log_model(model, "model",
+                                 registered_model_name="HousePriceModel",
+                                 input_example=X_train.head(1).to_dict(orient="records"))  # Exemple d'entrée pour la signature
+
+        # Log des métriques
+        r2_score = model.score(X_train, y_train)
+        mlflow.log_metric("r2_score", r2_score)
+        print(f"Modèle R^2 Score: {r2_score}")
+
+    # Sauvegarder le modèle sous forme de fichier pickle
     model_path = os.path.join(os.path.dirname(__file__), 'house_price_model.pkl')
     joblib.dump(model, model_path)
     print(f"Modèle sauvegardé sous : {model_path}")
+
+    # Démarrer l'interface MLflow sur le port 8001
+    start_mlflow_ui()
 
 if __name__ == "__main__":
     train_model()

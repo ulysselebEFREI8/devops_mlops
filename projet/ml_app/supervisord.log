@@ -1,0 +1,12 @@
+2024-12-18 14:16:03,182 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-12-18 14:16:03,183 INFO supervisord started with pid 7
+2024-12-18 14:16:04,186 INFO spawned: 'flask_app' with pid 8
+2024-12-18 14:16:04,189 INFO spawned: 'mlflow' with pid 9
+2024-12-18 14:16:05,193 INFO success: flask_app entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-18 14:16:05,193 INFO success: mlflow entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-18 14:23:12,419 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-12-18 14:23:12,421 INFO supervisord started with pid 7
+2024-12-18 14:23:13,423 INFO spawned: 'flask_app' with pid 8
+2024-12-18 14:23:13,424 INFO spawned: 'mlflow' with pid 9
+2024-12-18 14:23:15,208 INFO success: flask_app entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-12-18 14:23:15,208 INFO success: mlflow entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
