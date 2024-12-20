@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1734644556403
+current_stage: None
+description: null
+last_updated_timestamp: 1734644556403
+name: HousePriceModel
+run_id: 00fa58504dcf446a937d7d1522ea8116
+run_link: null
+source: file:///home/ulbefrei/devops_efrei/projet/ml_app/mlruns/0/00fa58504dcf446a937d7d1522ea8116/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///home/ulbefrei/devops_efrei/projet/ml_app/mlruns/0/00fa58504dcf446a937d7d1522ea8116/artifacts/model
+user_id: null
+version: 3

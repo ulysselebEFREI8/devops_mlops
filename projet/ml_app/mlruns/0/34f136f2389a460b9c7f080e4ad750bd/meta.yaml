@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ulbefrei/devops_efrei/projet/ml_app/mlruns/0/34f136f2389a460b9c7f080e4ad750bd/artifacts
+end_time: 1734642705737
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 34f136f2389a460b9c7f080e4ad750bd
+run_name: efficient-whale-423
+run_uuid: 34f136f2389a460b9c7f080e4ad750bd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1734642703680
+status: 3
+tags: []
+user_id: ulbefrei

@@ -1,0 +1,29 @@
+# MLOps Project - ML App with Flask & MLflow
+
+This repository contains the infrastructure and application setup for a machine learning web application using Flask for serving the model and MLflow for managing experiments. The application is deployed using Docker and managed with Terraform. 
+
+## Project Structure
+
+The project consists of the following main components:
+
+- **`ml_app`**: The application directory containing the Flask app and MLflow UI setup.
+  - **`Dockerfile`**: The Dockerfile used to build the Docker image.
+  - **`supervisord.conf`**: The Supervisor configuration to manage the processes (Flask & MLflow).
+  - **`entrypoint.sh`**: The entry point script that starts Supervisor.
+  - **`requirements.txt`**: The Python dependencies for the application.
+  - **`app.py`**: The Flask app that serves the model.
+
+- **`infrastructure`**: The infrastructure directory containing the Terraform configuration to deploy the Docker container.
+  - **`main.tf`**: The Terraform configuration to create the Docker container and network.
+
+## Getting Started
+
+### 1. Start app
+
+git clone https://github.com/ulysselebEFREI8/devops_mlops
+cd projet/infrastructure
+terraform init
+terraform apply
+docker exec -it ml_app /bin/bash
+mlflow ui --host 0.0.0.0 --port 8001
+

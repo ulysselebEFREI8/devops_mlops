@@ -1,0 +1,14 @@
+{
+  "inputs": [
+    {
+      "bedrooms": 3,
+      "bathrooms": 1.75,
+      "sqft_living": 1780,
+      "sqft_lot": 13095,
+      "waterfront": 0,
+      "condition": 3,
+      "grade": 7,
+      "yr_built": 1983
+    }
+  ]
+}

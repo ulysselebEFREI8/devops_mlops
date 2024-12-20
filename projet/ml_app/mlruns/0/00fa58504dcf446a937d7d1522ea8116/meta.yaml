@@ -1,0 +1,15 @@
+artifact_uri: file:///home/ulbefrei/devops_efrei/projet/ml_app/mlruns/0/00fa58504dcf446a937d7d1522ea8116/artifacts
+end_time: 1734644556408
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 00fa58504dcf446a937d7d1522ea8116
+run_name: upset-skunk-490
+run_uuid: 00fa58504dcf446a937d7d1522ea8116
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1734644554781
+status: 3
+tags: []
+user_id: ulbefrei

@@ -9,7 +9,7 @@ terraform {
 
 provider "docker" {}
 
-# Créer un réseau Docker pour la communication entre les conteneurs
+# Créer un réseau Docker
 resource "docker_network" "mlops_network" {
   name = "mlops_network"
 }
@@ -26,24 +26,21 @@ resource "docker_image" "ml_app_image" {
 # Créer le conteneur pour l'application et MLflow
 resource "docker_container" "ml_app" {
   name  = "ml_app"
-  image = docker_image.ml_app_image.name  # Correction ici
+  image = docker_image.ml_app_image.name
   networks_advanced {
     name = docker_network.mlops_network.name
   }
   ports {
-    internal = 8000
-    external = 8000  # Port de ton application
+    internal = 8000  # Flask
+    external = 5000  # Accès Flask
   }
   ports {
-    internal = 8001
-    external = 8001  # Port de l'interface MLflow
+    internal = 8001  # MLflow
+    external = 8001  # Accès MLflow
   }
-  command = [
-    "sh", "-c", "supervisord -c /app/supervisord.conf"
-  ]
   volumes {
     host_path      = abspath("${path.module}/../ml_app")
     container_path = "/app"
   }
-  restart = "always"  # Redémarre automatiquement si le conteneur plante
+  restart = "always"
 }

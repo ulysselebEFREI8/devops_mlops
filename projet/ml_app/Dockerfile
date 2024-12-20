@@ -1,23 +1,36 @@
-# Utiliser l'image officielle de Python 3.9 comme base
+# Utilisation d'une image de base Python
 FROM python:3.9-slim
 
-# Installer les dépendances nécessaires
-RUN apt-get update && apt-get install -y \
-    supervisor && \
-    pip install flask numpy scikit-learn joblib mlflow && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Créer les dossiers nécessaires
-RUN mkdir -p /app /var/log/supervisor
-
-# Copier les fichiers nécessaires
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /app
-COPY app.py /app/
-COPY house_price_model.pkl /app/
+
+# Créer le répertoire pour les logs de Flask et MLflow
+RUN mkdir -p /app/logs
+RUN chmod -R 777 /app/logs  # Assure que tout le monde peut lire/écrire dans /app/logs
+
+# Copier le fichier requirements.txt dans le conteneur
+COPY requirements.txt /app/
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Installer Supervisor pour gérer les processus
+RUN apt-get update && apt-get install -y supervisor && rm -rf /var/lib/apt/lists/*
+
+# Copier tous les fichiers de l'application dans le répertoire de travail
+COPY . /app/
+
+# Copier le fichier supervisord.conf dans le conteneur
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Exposer les ports pour Flask et MLflow
+# Copier le script entrypoint.sh dans le conteneur
+COPY entrypoint.sh /entrypoint.sh
+
+# Rendre le script exécutable
+RUN chmod +x /entrypoint.sh
+
+# Exposer les ports nécessaires
 EXPOSE 8000 8001
 
-# Lancer supervisord pour gérer plusieurs processus
-CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Utiliser le script comme point d'entrée
+ENTRYPOINT ["/entrypoint.sh"]

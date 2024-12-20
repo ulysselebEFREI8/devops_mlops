@@ -11,3 +11,5 @@ Jinja2
 scipy
 pandas
 mlflow
+gunicorn
+supervisor
